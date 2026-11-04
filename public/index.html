@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RK Insurance App – Quotes, Renewals & Customer Tracker</title>
+<meta name="description" content="RK Insurance app for Vasai-Virar: get motor, home, fire and term insurance quotes, renew policies and track customer renewals. Call 9930943076.">
+<meta name="theme-color" content="#14185a">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#14185a;--sky:#d9eefa;--ink:#161a3a;--muted:#4b5275;--bg:#f3f9fd;--card:#fff;--line:#cfe3f0;--accent:#e8892b;--ok:#1fa35a;--warn:#d98a00;--bad:#d03a3a;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--navy:#0c0f3a;--sky:#1c2a63;--ink:#eaf1fb;--muted:#a9b6d6;--bg:#0a0d2b;--card:#121a47;--line:#26336e;color-scheme:dark}}
+:root[data-theme="dark"]{--navy:#0c0f3a;--sky:#1c2a63;--ink:#eaf1fb;--muted:#a9b6d6;--bg:#0a0d2b;--card:#121a47;--line:#26336e;color-scheme:dark}
+*,*:before,*:after{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Hind,system-ui,sans-serif;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;margin:0 0 .4em;line-height:1.15}
+p{margin:0 0 .8em}
+header{background:var(--navy);color:#fff;padding:16px 20px;position:sticky;top:env(safe-area-inset-top,0px);z-index:10;display:flex;justify-content:space-between;align-items:center}
+header b{font:800 1.25rem 'Bricolage Grotesque',sans-serif}
+header small{opacity:.8;display:block;font-size:.78rem}
+.wrap{max-width:640px;margin:0 auto;padding:20px}
+.tab{display:none}.tab.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px}
+.hero{background:linear-gradient(150deg,var(--sky),var(--card));border:1px solid var(--line);border-radius:22px;padding:24px;margin-bottom:16px}
+.hero h1{font-size:2rem;font-weight:800}
+.hero p{color:var(--muted)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:left;font:inherit;color:inherit;cursor:pointer;min-height:96px}
+.tile span{font-size:1.7rem;display:block}
+.tile b{font-family:'Bricolage Grotesque',sans-serif}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;border:0;background:var(--accent);color:#1b1200;font:600 1rem Hind,sans-serif;text-decoration:none;cursor:pointer;width:100%}
+.btn.o{background:transparent;border:2px solid var(--line);color:var(--ink)}
+.btn.g{background:var(--ok);color:#fff}
+.btn.sm{min-height:38px;width:auto;padding:0 14px;font-size:.9rem}
+label{display:block;font-weight:600;font-size:.9rem;margin:12px 0 4px}
+input,select{width:100%;min-height:48px;padding:0 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.row>*{flex:1}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;font:600 .88rem Hind,sans-serif;cursor:pointer}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.cust{display:grid;gap:6px}
+.cust h3{font-size:1.05rem;margin:0}
+.cust .meta{color:var(--muted);font-size:.9rem}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;font-weight:600;font-size:.8rem;color:#fff}
+.b-ok{background:var(--ok)}.b-warn{background:var(--warn)}.b-bad{background:var(--bad)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.stat b{font:800 1.5rem 'Bricolage Grotesque',sans-serif;display:block}
+.stat span{font-size:.8rem;color:var(--muted)}
+.note{font-size:.85rem;color:var(--muted)}
+.ins{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none;margin:10px 0 0}
+.ins li{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.88rem;font-weight:600}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:20}
+nav button{background:none;border:0;color:var(--muted);font:600 .75rem Hind,sans-serif;min-height:56px;cursor:pointer;display:grid;place-items:center;gap:2px}
+nav button i{font-style:normal;font-size:1.3rem}
+nav button.on{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+<header><div><b>RK Insurance</b><small>Vasai-Virar · Open 24/7</small></div><a class="btn sm" style="text-decoration:none" href="tel:+919930943076">Call</a></header>
+<div class="wrap">
+
+<section class="tab on" id="home">
+<div class="hero"><h1>Insurance made easy in Vasai-Virar</h1><p>Car, bike, truck, bus and Tata Ace insurance with attractive discounts and claim help on the spot.</p>
+<button class="btn" data-go="quote">Get a free quote</button></div>
+<div class="tiles">
+<button class="tile" data-go="quote" data-type="Car insurance"><span>🚗</span><b>Car</b></button>
+<button class="tile" data-go="quote" data-type="Bike insurance"><span>🏍️</span><b>Bike</b></button>
+<button class="tile" data-go="quote" data-type="Truck / Tata Ace insurance"><span>🚚</span><b>Truck / Tata Ace</b></button>
+<button class="tile" data-go="quote" data-type="Bus insurance"><span>🚌</span><b>Bus</b></button>
+<button class="tile" data-go="quote" data-type="Home insurance"><span>🏠</span><b>Home &amp; Fire</b></button>
+<button class="tile" data-go="quote" data-type="Term insurance"><span>👨‍👩‍👧</span><b>Term</b></button>
+</div>
+<div class="card" style="margin-top:14px"><h3>Our insurance partners</h3>
+<ul class="ins"><li>ICICI Lombard</li><li>Tata AIG</li><li>Cholamandalam MS</li><li>Shriram</li><li>Reliance</li><li>Go Digit</li><li>Royal Sundaram</li><li>Universal Sompo</li><li>Bajaj Allianz</li><li>HDFC Ergo</li></ul></div>
+</section>
+
+<section class="tab" id="quote">
+<h2>Get a free quote or renew</h2>
+<form class="card" id="qf">
+<div class="chips" id="mode"><button type="button" class="chip on" data-m="New policy">New policy</button><button type="button" class="chip" data-m="Renewal">Renewal</button></div>
+<label for="qn">Your name</label><input id="qn" required autocomplete="name">
+<label for="qp">Mobile number</label><input id="qp" type="tel" inputmode="numeric" autocomplete="tel">
+<label for="qt">Insurance type</label>
+<select id="qt"><option>Car insurance</option><option>Bike insurance</option><option>Truck / Tata Ace insurance</option><option>Bus insurance</option><option>Home insurance</option><option>Fire insurance</option><option>Term insurance</option></select>
+<label for="qv">Vehicle number or details</label><input id="qv" placeholder="MH 48 AB 1234">
+<div class="row"><button class="btn g" type="submit">Send on WhatsApp</button><button class="btn o" type="button" id="qe">Send by email</button></div>
+<p class="note" style="margin-top:10px">Opens WhatsApp or your email app with your details. No obligation.</p>
+</form>
+</section>
+
+<section class="tab" id="staff">
+<h2>Customer &amp; renewal tracker</h2>
+<div class="stats"><div class="stat"><b id="s1">0</b><span>Total</span></div><div class="stat"><b id="s2">0</b><span>Due in 30 days</span></div><div class="stat"><b id="s3">0</b><span>Expired</span></div></div>
+<form class="card" id="cf">
+<h3>Add customer</h3>
+<label for="cn">Customer name</label><input id="cn" required>
+<label for="cp">Mobile (10 digits)</label><input id="cp" type="tel" inputmode="numeric" pattern="[0-9]{10}" required>
+<label for="cv">Vehicle no. / policy for</label><input id="cv">
+<label for="ci">Insurer</label>
+<select id="ci"><option>ICICI Lombard</option><option>Tata AIG</option><option>Cholamandalam MS</option><option>Shriram</option><option>Reliance</option><option>Go Digit</option><option>Royal Sundaram</option><option>Universal Sompo</option><option>Bajaj Allianz</option><option>HDFC Ergo</option></select>
+<label for="cd">Policy expiry date</label><input id="cd" type="date" required>
+<div class="row"><button class="btn" type="submit">Save customer</button></div>
+</form>
+<div class="chips" id="flt"><button class="chip on" data-f="all">All</button><button class="chip" data-f="due">Due soon</button><button class="chip" data-f="exp">Expired</button></div>
+<div id="list"></div>
+<div class="row"><button class="btn o" id="csv">Download CSV</button></div>
+<p class="note" style="margin-top:12px">Saved online and shared across your devices. You get a WhatsApp alert each morning for policies expiring within 5 days.</p>
+</section>
+
+<section class="tab" id="contact">
+<h2>Contact us</h2>
+<div class="card"><h3>RK Insurance</h3><p>Santosh Bhuvan Naka, Valai Pada Road, Nalasopara (E) 401209</p>
+<p><b>Ramsajivan Pal</b>, Director &amp; Sales Manager<br><b>Krish Pal</b>, Business Handler</p>
+<div class="row"><a class="btn" style="text-decoration:none" href="tel:+919930943076">Call 9930943076</a><a class="btn o" style="text-decoration:none" href="tel:+918080214878">8080214878</a></div>
+<div class="row"><a class="btn g" style="text-decoration:none" href="https://wa.me/919930943076" rel="noopener">WhatsApp</a></div>
+<p class="note" style="margin-top:12px"><a href="mailto:rspal4005@gmail.com">rspal4005@gmail.com</a><br><a href="mailto:palkrish382@gmail.com">palkrish382@gmail.com</a></p></div>
+</section>
+</div>
+
+<nav aria-label="App">
+<button class="on" data-go="home"><i>🏠</i>Home</button>
+<button data-go="quote"><i>📝</i>Quote</button>
+<button data-go="staff"><i>📋</i>Tracker</button>
+<button data-go="contact"><i>📞</i>Contact</button>
+</nav>
+
+<script>
+var $=function(i){return document.getElementById(i)},WA='919930943076',KEY='rk_customers',mode='New policy',flt='all',db=[];
+function go(t){document.querySelectorAll('.tab').forEach(function(s){s.classList.toggle('on',s.id===t)});document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.go===t)});scrollTo(0,0);try{history.replaceState(null,'','#'+t)}catch(e){}if(t==='staff')load()}
+document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.type)$('qt').value=b.dataset.type;go(b.dataset.go)})});
+$('mode').addEventListener('click',function(e){var m=e.target.dataset.m;if(!m)return;mode=m;this.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c.dataset.m===m)})});
+function msg(){return 'Hi RK Insurance, I am '+$('qn').value+' ('+($('qp').value||'no number')+'). '+mode+' for '+$('qt').value+'. Details: '+($('qv').value||'-')}
+$('qf').addEventListener('submit',function(e){e.preventDefault();window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg()),'_blank','noopener')});
+$('qe').addEventListener('click',function(){if(!$('qf').reportValidity())return;window.open('mailto:palkrish382@gmail.com?subject='+encodeURIComponent('New insurance enquiry: '+mode)+'&body='+encodeURIComponent(msg()),'_blank','noopener')});
+
+function pw(){var p=sessionStorage.getItem('rkpw');if(!p){p=prompt('Staff password');if(p)sessionStorage.setItem('rkpw',p)}return p||''}
+function api(m,b){return fetch('/api/customers',{method:m,headers:{'x-pass':pw(),'content-type':'application/json'},body:b?JSON.stringify(b):undefined}).then(function(r){if(r.status===401){sessionStorage.removeItem('rkpw');alert('Wrong password');throw 0}return r.json()})}
+function save(){api('PUT',db).catch(function(){})}
+function load(){api('GET').then(function(d){db=d;draw()}).catch(function(){})}
+function days(d){var t=new Date();t.setHours(0,0,0,0);return Math.round((new Date(d+'T00:00:00')-t)/864e5)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function draw(){
+var due=0,exp=0;db.forEach(function(c){var d=days(c.d);if(d<0)exp++;else if(d<=30)due++});
+$('s1').textContent=db.length;$('s2').textContent=due;$('s3').textContent=exp;
+var l=db.slice().sort(function(a,b){return a.d<b.d?-1:1}).filter(function(c){var d=days(c.d);return flt==='all'||(flt==='due'&&d>=0&&d<=30)||(flt==='exp'&&d<0)});
+$('list').innerHTML=l.length?l.map(function(c){var d=days(c.d),cls=d<0?'b-bad':d<=30?'b-warn':'b-ok',tx=d<0?'Expired '+(-d)+' d ago':d===0?'Expires today':d+' days left';
+return '<div class="card cust"><h3>'+esc(c.n)+'</h3><div class="meta">'+esc(c.v||'-')+' · '+esc(c.i)+' · '+esc(c.p)+'</div><div><span class="badge '+cls+'">'+tx+'</span> <span class="meta">'+c.d+'</span></div><div class="row"><button class="btn g sm" data-r="'+c.id+'">Remind on WhatsApp</button><a class="btn o sm" style="text-decoration:none" href="tel:+91'+esc(c.p)+'">Call</a><button class="btn o sm" data-x="'+c.id+'">Delete</button></div></div>'}).join(''):'<p class="note">No customers here yet.</p>'}
+$('cf').addEventListener('submit',function(e){e.preventDefault();db.push({id:Date.now(),n:$('cn').value.trim(),p:$('cp').value.trim(),v:$('cv').value.trim(),i:$('ci').value,d:$('cd').value});save();this.reset();draw()});
+$('flt').addEventListener('click',function(e){var f=e.target.dataset.f;if(!f)return;flt=f;this.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c.dataset.f===f)});draw()});
+$('list').addEventListener('click',function(e){var r=e.target.dataset.r,x=e.target.dataset.x;
+if(r){var c=db.filter(function(k){return k.id==r})[0];window.open('https://wa.me/91'+c.p+'?text='+encodeURIComponent('Namaste '+c.n+', your insurance policy ('+(c.v||'policy')+', '+c.i+') expires on '+c.d+'. RK Insurance can renew it with the best discount. Reply or call 9930943076.'),'_blank','noopener')}
+if(x&&confirm('Delete this customer?')){db=db.filter(function(k){return k.id!=x});save();draw()}});
+$('csv').addEventListener('click',function(){var t='Name,Mobile,Vehicle,Insurer,Expiry\n'+db.map(function(c){return[c.n,c.p,c.v,c.i,c.d].map(function(s){return '"'+String(s).replace(/"/g,'""')+'"'}).join(',')}).join('\n');var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(t);a.download='rk-customers.csv';a.click()});
+var h=location.hash.slice(1);if(['home','quote','staff','contact'].indexOf(h)>-1)go(h);
+</script>
+</body>
+</html>
