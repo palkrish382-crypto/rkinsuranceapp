@@ -1,19 +1,35 @@
 import { getStore } from "@netlify/blobs";
+import { verify } from "../lib/token.mjs";
+
+const json = (d, s = 200) =>
+  new Response(JSON.stringify(d), { status: s, headers: { "content-type": "application/json" } });
 
 export default async (req) => {
-  const pass = process.env.STAFF_PASSWORD;
-  if (!pass || req.headers.get("x-pass") !== pass) {
-    return new Response("[]", { status: 401 });
-  }
+  if (!process.env.STAFF_PASSWORD)
+    return json({ error: "STAFF_PASSWORD is not set in Netlify environment variables" }, 500);
+  const who = verify((req.headers.get("authorization") || "").replace("Bearer ", ""));
+  if (!who) return json({ error: "Session expired. Please login again." }, 401);
+
   const store = getStore("rk");
-  if (req.method === "PUT") {
-    const data = await req.json();
-    if (!Array.isArray(data)) return new Response("bad request", { status: 400 });
-    await store.setJSON("customers", data);
-    return Response.json(data);
+  let list = (await store.get("customers", { type: "json" })) || [];
+
+  if (req.method === "POST") {
+    const r = await req.json();
+    if (!r || !r.id || !r.n) return json({ error: "Bad record" }, 400);
+    const i = list.findIndex((c) => String(c.id) === String(r.id));
+    r.by = i >= 0 ? list[i].by : who;
+    r.ub = who;
+    if (i >= 0) list[i] = r; else list.push(r);
+    await store.setJSON("customers", list);
+    return json(r);
   }
-  const list = (await store.get("customers", { type: "json" })) || [];
-  return Response.json(list);
+  if (req.method === "DELETE") {
+    const id = new URL(req.url).searchParams.get("id");
+    list = list.filter((c) => String(c.id) !== id);
+    await store.setJSON("customers", list);
+    return json({ ok: true });
+  }
+  return json(list);
 };
 
 export const config = { path: "/api/customers" };
