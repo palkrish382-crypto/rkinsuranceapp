@@ -1,162 +1,144 @@
+
 <!DOCTYPE html>
 <html lang="en-IN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>RK Insurance App – Quotes, Renewals & Customer Tracker</title>
-<meta name="description" content="RK Insurance app for Vasai-Virar: get motor, home, fire and term insurance quotes, renew policies and track customer renewals. Call 9930943076.">
+<meta name="robots" content="noindex">
 <meta name="theme-color" content="#14185a">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+<title>RK Insurance Dashboard</title>
 <style>
-:root{--navy:#14185a;--sky:#d9eefa;--ink:#161a3a;--muted:#4b5275;--bg:#f3f9fd;--card:#fff;--line:#cfe3f0;--accent:#e8892b;--ok:#1fa35a;--warn:#d98a00;--bad:#d03a3a;color-scheme:light;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--navy:#0c0f3a;--sky:#1c2a63;--ink:#eaf1fb;--muted:#a9b6d6;--bg:#0a0d2b;--card:#121a47;--line:#26336e;color-scheme:dark}}
-:root[data-theme="dark"]{--navy:#0c0f3a;--sky:#1c2a63;--ink:#eaf1fb;--muted:#a9b6d6;--bg:#0a0d2b;--card:#121a47;--line:#26336e;color-scheme:dark}
-*,*:before,*:after{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Hind,system-ui,sans-serif;padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
-h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;margin:0 0 .4em;line-height:1.15}
-p{margin:0 0 .8em}
-header{background:var(--navy);color:#fff;padding:16px 20px;position:sticky;top:env(safe-area-inset-top,0px);z-index:10;display:flex;justify-content:space-between;align-items:center}
-header b{font:800 1.25rem 'Bricolage Grotesque',sans-serif}
-header small{opacity:.8;display:block;font-size:.78rem}
-.wrap{max-width:640px;margin:0 auto;padding:20px}
-.tab{display:none}.tab.on{display:block}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px}
-.hero{background:linear-gradient(150deg,var(--sky),var(--card));border:1px solid var(--line);border-radius:22px;padding:24px;margin-bottom:16px}
-.hero h1{font-size:2rem;font-weight:800}
-.hero p{color:var(--muted)}
-.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tile{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;text-align:left;font:inherit;color:inherit;cursor:pointer;min-height:96px}
-.tile span{font-size:1.7rem;display:block}
-.tile b{font-family:'Bricolage Grotesque',sans-serif}
-.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;border:0;background:var(--accent);color:#1b1200;font:600 1rem Hind,sans-serif;text-decoration:none;cursor:pointer;width:100%}
-.btn.o{background:transparent;border:2px solid var(--line);color:var(--ink)}
-.btn.g{background:var(--ok);color:#fff}
-.btn.sm{min-height:38px;width:auto;padding:0 14px;font-size:.9rem}
-label{display:block;font-weight:600;font-size:.9rem;margin:12px 0 4px}
-input,select{width:100%;min-height:48px;padding:0 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
-.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-.row>*{flex:1}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;font:600 .88rem Hind,sans-serif;cursor:pointer}
+:root{--navy:#14185a;--ink:#161a3a;--muted:#4b5275;--bg:#f3f9fd;--card:#fff;--line:#cfe3f0;--accent:#e8892b;--ok:#1fa35a;--warn:#d98a00;--bad:#d03a3a;--blink:#ffd6d6;color-scheme:light;padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root{--navy:#0c0f3a;--ink:#eaf1fb;--muted:#a9b6d6;--bg:#0a0d2b;--card:#121a47;--line:#26336e;--blink:#5a1620;color-scheme:dark}}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}
+header{background:var(--navy);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+header b{font-size:1.15rem}
+.wrap{max-width:720px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:12px}
+h2,h3{margin:0 0 8px}
+label{display:block;font-weight:600;font-size:.88rem;margin:10px 0 4px}
+input,select{width:100%;min-height:46px;padding:0 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:inherit}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 18px;border-radius:999px;border:0;background:var(--accent);color:#1b1200;font:600 1rem system-ui,sans-serif;text-decoration:none;cursor:pointer}
+.btn.sm{min-height:38px;padding:0 14px;font-size:.9rem}
+.btn.g{background:var(--ok);color:#fff}.btn.o{background:transparent;border:2px solid var(--line);color:var(--ink)}.btn.w{width:100%}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 4px;text-align:center}
+.stat b{display:block;font-size:1.45rem}.stat span{font-size:.72rem;color:var(--muted)}
+.pill{font-size:.78rem;font-weight:600;padding:4px 10px;border-radius:999px;background:#ffffff26;cursor:pointer;border:0;color:#fff}
+.pill.ok{background:var(--ok)}.pill.bad{background:var(--bad)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;font:600 .85rem system-ui,sans-serif;cursor:pointer}
 .chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.cust{display:grid;gap:6px}
-.cust h3{font-size:1.05rem;margin:0}
-.cust .meta{color:var(--muted);font-size:.9rem}
-.badge{display:inline-block;padding:2px 10px;border-radius:999px;font-weight:600;font-size:.8rem;color:#fff}
-.b-ok{background:var(--ok)}.b-warn{background:var(--warn)}.b-bad{background:var(--bad)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
-.stat b{font:800 1.5rem 'Bricolage Grotesque',sans-serif;display:block}
-.stat span{font-size:.8rem;color:var(--muted)}
-.note{font-size:.85rem;color:var(--muted)}
-.ins{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none;margin:10px 0 0}
-.ins li{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.88rem;font-weight:600}
-nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:20}
-nav button{background:none;border:0;color:var(--muted);font:600 .75rem Hind,sans-serif;min-height:56px;cursor:pointer;display:grid;place-items:center;gap:2px}
-nav button i{font-style:normal;font-size:1.3rem}
-nav button.on{color:var(--accent)}
+.cust h3{font-size:1.05rem}.meta{color:var(--muted);font-size:.9rem}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;font-weight:700;font-size:.78rem;color:#fff;background:var(--ok);margin-left:6px;vertical-align:middle}
+.cust.soon{border-left:6px solid var(--warn)}.cust.soon .badge{background:var(--warn)}
+.cust.expired{border-left:6px solid var(--bad)}.cust.expired .badge{background:var(--bad)}
+.cust.urgent{border:3px solid var(--bad);background:var(--blink);animation:blink 1s ease-in-out infinite}
+.cust.urgent .badge{background:var(--bad)}
+.banner{background:var(--bad);color:#fff;font-weight:700;border-radius:14px;padding:12px 14px;margin-bottom:12px;animation:blinkb 1s ease-in-out infinite}
+@keyframes blink{0%,100%{box-shadow:0 0 0 0 rgba(208,58,58,0);background:var(--card)}50%{box-shadow:0 0 0 6px rgba(208,58,58,.55);background:var(--blink)}}
+@keyframes blinkb{0%,100%{opacity:1}50%{opacity:.45}}
+@media (prefers-reduced-motion:reduce){.cust.urgent,.banner{animation:none}}
+.lock{min-height:100vh;display:grid;place-items:center;padding:20px}
+.lock .card{width:100%;max-width:380px}
+.pf{margin-top:8px}.err{color:var(--bad);font-weight:600;min-height:1.4em;margin:8px 0 0}
+.note{font-size:.82rem;color:var(--muted)}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
-<header><div><b>RK Insurance</b><small>Vasai-Virar · Open 24/7</small></div><a class="btn sm" style="text-decoration:none" href="tel:+919930943076">Call</a></header>
+<div class="lock" id="lock" hidden><div class="card">
+<h2 style="font-size:1.5rem">Welcome to RK Insurance Dashboard</h2>
+<div id="w1"><p class="note">Choose your profile to continue.</p><div id="pl"></div><button class="btn w o" id="nw" type="button" style="margin-top:10px">+ Create new profile</button></div>
+<form id="w2" hidden><p>Welcome back, <b id="wn"></b></p><label for="lp">Passcode</label><input id="lp" type="password" autocomplete="current-password" required><button class="btn w" style="margin-top:12px" type="submit">Login</button><button class="btn w o" id="sw" type="button" style="margin-top:8px">Switch profile</button></form>
+<form id="w3" hidden><label for="cs">Setup code (given by the owner)</label><input id="cs" type="password" required><label for="nn">Your name</label><input id="nn" minlength="2" maxlength="30" required autocomplete="name"><label for="np">Create passcode (min 4)</label><input id="np" type="password" minlength="4" required autocomplete="new-password"><label for="nq">Confirm passcode</label><input id="nq" type="password" required autocomplete="new-password"><button class="btn w" style="margin-top:12px" type="submit">Create profile &amp; login</button><button class="btn w o" id="bk" type="button" style="margin-top:8px">Back</button></form>
+<p class="err" id="lm"></p></div></div>
+
+<div id="app" hidden>
+<header><b>RK Insurance <small id="hi" style="font-weight:400;opacity:.85"></small></b><div><button class="pill" id="st" type="button">Loading…</button> <button class="pill" id="lo" type="button">Logout</button></div></header>
 <div class="wrap">
+<div class="banner" id="bn" hidden></div>
+<div class="stats"><div class="stat"><b id="s1">0</b><span>Total</span></div><div class="stat"><b id="s2">0</b><span>Within 5 days</span></div><div class="stat"><b id="s3">0</b><span>6–30 days</span></div><div class="stat"><b id="s4">0</b><span>Expired</span></div></div>
 
-<section class="tab on" id="home">
-<div class="hero"><h1>Insurance made easy in Vasai-Virar</h1><p>Car, bike, truck, bus and Tata Ace insurance with attractive discounts and claim help on the spot.</p>
-<button class="btn" data-go="quote">Get a free quote</button></div>
-<div class="tiles">
-<button class="tile" data-go="quote" data-type="Car insurance"><span>🚗</span><b>Car</b></button>
-<button class="tile" data-go="quote" data-type="Bike insurance"><span>🏍️</span><b>Bike</b></button>
-<button class="tile" data-go="quote" data-type="Truck / Tata Ace insurance"><span>🚚</span><b>Truck / Tata Ace</b></button>
-<button class="tile" data-go="quote" data-type="Bus insurance"><span>🚌</span><b>Bus</b></button>
-<button class="tile" data-go="quote" data-type="Home insurance"><span>🏠</span><b>Home &amp; Fire</b></button>
-<button class="tile" data-go="quote" data-type="Term insurance"><span>👨‍👩‍👧</span><b>Term</b></button>
-</div>
-<div class="card" style="margin-top:14px"><h3>Our insurance partners</h3>
-<ul class="ins"><li>ICICI Lombard</li><li>Tata AIG</li><li>Cholamandalam MS</li><li>Shriram</li><li>Reliance</li><li>Go Digit</li><li>Royal Sundaram</li><li>Universal Sompo</li><li>Bajaj Allianz</li><li>HDFC Ergo</li></ul></div>
-</section>
-
-<section class="tab" id="quote">
-<h2>Get a free quote or renew</h2>
-<form class="card" id="qf">
-<div class="chips" id="mode"><button type="button" class="chip on" data-m="New policy">New policy</button><button type="button" class="chip" data-m="Renewal">Renewal</button></div>
-<label for="qn">Your name</label><input id="qn" required autocomplete="name">
-<label for="qp">Mobile number</label><input id="qp" type="tel" inputmode="numeric" autocomplete="tel">
-<label for="qt">Insurance type</label>
-<select id="qt"><option>Car insurance</option><option>Bike insurance</option><option>Truck / Tata Ace insurance</option><option>Bus insurance</option><option>Home insurance</option><option>Fire insurance</option><option>Term insurance</option></select>
-<label for="qv">Vehicle number or details</label><input id="qv" placeholder="MH 48 AB 1234">
-<div class="row"><button class="btn g" type="submit">Send on WhatsApp</button><button class="btn o" type="button" id="qe">Send by email</button></div>
-<p class="note" style="margin-top:10px">Opens WhatsApp or your email app with your details. No obligation.</p>
-</form>
-</section>
-
-<section class="tab" id="staff">
-<h2>Customer &amp; renewal tracker</h2>
-<div class="stats"><div class="stat"><b id="s1">0</b><span>Total</span></div><div class="stat"><b id="s2">0</b><span>Due in 30 days</span></div><div class="stat"><b id="s3">0</b><span>Expired</span></div></div>
-<form class="card" id="cf">
-<h3>Add customer</h3>
+<details class="card" id="fd" open><summary><b id="ft">Add customer</b></summary>
+<form id="cf"><input type="hidden" id="eid">
 <label for="cn">Customer name</label><input id="cn" required>
 <label for="cp">Mobile (10 digits)</label><input id="cp" type="tel" inputmode="numeric" pattern="[0-9]{10}" required>
 <label for="cv">Vehicle no. / policy for</label><input id="cv">
 <label for="ci">Insurer</label>
 <select id="ci"><option>ICICI Lombard</option><option>Tata AIG</option><option>Cholamandalam MS</option><option>Shriram</option><option>Reliance</option><option>Go Digit</option><option>Royal Sundaram</option><option>Universal Sompo</option><option>Bajaj Allianz</option><option>HDFC Ergo</option></select>
 <label for="cd">Policy expiry date</label><input id="cd" type="date" required>
-<div class="row"><button class="btn" type="submit">Save customer</button></div>
-</form>
-<div class="chips" id="flt"><button class="chip on" data-f="all">All</button><button class="chip" data-f="due">Due soon</button><button class="chip" data-f="exp">Expired</button></div>
+<div class="row"><button class="btn" id="sb" type="submit">Add customer</button><button class="btn o" id="cx" type="button" hidden>Cancel edit</button></div></form></details>
+
+<input id="sq" type="search" placeholder="Search name, vehicle or mobile">
+<div class="chips" id="flt"><button class="chip on" data-f="all">All</button><button class="chip" data-f="urg">Within 5 days</button><button class="chip" data-f="soon">Within 30 days</button><button class="chip" data-f="exp">Expired</button></div>
 <div id="list"></div>
-<div class="row"><button class="btn o" id="csv">Download CSV</button></div>
-<p class="note" style="margin-top:12px">Saved online and shared across your devices. You get a WhatsApp alert each morning for policies expiring within 5 days.</p>
-</section>
-
-<section class="tab" id="contact">
-<h2>Contact us</h2>
-<div class="card"><h3>RK Insurance</h3><p>Santosh Bhuvan Naka, Valai Pada Road, Nalasopara (E) 401209</p>
-<p><b>Ramsajivan Pal</b>, Director &amp; Sales Manager<br><b>Krish Pal</b>, Business Handler</p>
-<div class="row"><a class="btn" style="text-decoration:none" href="tel:+919930943076">Call 9930943076</a><a class="btn o" style="text-decoration:none" href="tel:+918080214878">8080214878</a></div>
-<div class="row"><a class="btn g" style="text-decoration:none" href="https://wa.me/919930943076" rel="noopener">WhatsApp</a></div>
-<p class="note" style="margin-top:12px"><a href="mailto:rspal4005@gmail.com">rspal4005@gmail.com</a><br><a href="mailto:palkrish382@gmail.com">palkrish382@gmail.com</a></p></div>
-</section>
-</div>
-
-<nav aria-label="App">
-<button class="on" data-go="home"><i>🏠</i>Home</button>
-<button data-go="quote"><i>📝</i>Quote</button>
-<button data-go="staff"><i>📋</i>Tracker</button>
-<button data-go="contact"><i>📞</i>Contact</button>
-</nav>
+<div class="row"><button class="btn o" id="csv" type="button">Download CSV backup</button></div>
+<p class="note">Saved online and on this phone. Daily 9 AM WhatsApp alert covers policies expiring within 5 days.</p>
+</div></div>
 
 <script>
-var $=function(i){return document.getElementById(i)},WA='919930943076',KEY='rk_customers',mode='New policy',flt='all',db=[];
-function go(t){document.querySelectorAll('.tab').forEach(function(s){s.classList.toggle('on',s.id===t)});document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.go===t)});scrollTo(0,0);try{history.replaceState(null,'','#'+t)}catch(e){}if(t==='staff')load()}
-document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.type)$('qt').value=b.dataset.type;go(b.dataset.go)})});
-$('mode').addEventListener('click',function(e){var m=e.target.dataset.m;if(!m)return;mode=m;this.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c.dataset.m===m)})});
-function msg(){return 'Hi RK Insurance, I am '+$('qn').value+' ('+($('qp').value||'no number')+'). '+mode+' for '+$('qt').value+'. Details: '+($('qv').value||'-')}
-$('qf').addEventListener('submit',function(e){e.preventDefault();window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg()),'_blank','noopener')});
-$('qe').addEventListener('click',function(){if(!$('qf').reportValidity())return;window.open('mailto:palkrish382@gmail.com?subject='+encodeURIComponent('New insurance enquiry: '+mode)+'&body='+encodeURIComponent(msg()),'_blank','noopener')});
-
-function pw(){var p=sessionStorage.getItem('rkpw');if(!p){p=prompt('Staff password');if(p)sessionStorage.setItem('rkpw',p)}return p||''}
-function api(m,b){return fetch('/api/customers',{method:m,headers:{'x-pass':pw(),'content-type':'application/json'},body:b?JSON.stringify(b):undefined}).then(function(r){if(r.status===401){sessionStorage.removeItem('rkpw');alert('Wrong password');throw 0}return r.json()})}
-function save(){api('PUT',db).catch(function(){})}
-function load(){api('GET').then(function(d){db=d;draw()}).catch(function(){})}
+var $=function(i){return document.getElementById(i)},C='rk_cache',WA='919930943076',db=[],flt='all',q='',chain=Promise.resolve();
+try{db=JSON.parse(localStorage.getItem(C)||'[]')}catch(e){db=[]}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function days(d){var t=new Date();t.setHours(0,0,0,0);return Math.round((new Date(d+'T00:00:00')-t)/864e5)}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function status(t,c){var e=$('st');e.textContent=t;e.className='pill '+(c||'')}
+function cache(){try{localStorage.setItem(C,JSON.stringify(db))}catch(e){}}
+function tok(){try{return sessionStorage.getItem('rk_t')||''}catch(e){return ''}}
+function who(){try{return sessionStorage.getItem('rk_n')||''}catch(e){return ''}}
+function show(lock){$('lock').hidden=!lock;$('app').hidden=lock;if(!lock)$('hi').textContent='· '+who()}
+function lockOut(m){try{sessionStorage.removeItem('rk_t');sessionStorage.removeItem('rk_n')}catch(e){}show(true);step(1);$('lm').textContent=m||'';loadProfiles()}
+function strip(c){var o={};for(var k in c)if(k!=='_u')o[k]=c[k];return o}
+function raw(p,m,b){return fetch(p,{method:m,headers:{'authorization':'Bearer '+tok(),'content-type':'application/json'},body:b?JSON.stringify(b):undefined}).then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(r.status===401){var e=new Error(j.error||'Wrong passcode');e.auth=1;throw e}if(!r.ok)throw new Error(j.error||'Server error '+r.status);return j})})}
+function api(m,p,b){return raw('/api/customers'+(p||''),m,b)}
+function em(x){return x instanceof TypeError?'Cannot reach server. Check internet.':x.message}
+
+function push(c){chain=chain.then(function(){status('Saving…');return api('POST','',strip(c))}).then(function(){c._u=0;cache();status('Saved ✓','ok');draw()}).catch(function(e){if(e.auth){lockOut(e.message);return}c._u=1;cache();draw();status('Not synced. Tap to retry','bad')});return chain}
+function syncAll(){db.filter(function(c){return c._u}).forEach(push)}
+function load(){status('Loading…');return api('GET').then(function(srv){var un=db.filter(function(c){return c._u}),ids={};un.forEach(function(c){ids[c.id]=1});db=srv.filter(function(c){return !ids[c.id]}).concat(un);cache();draw();status('Saved ✓','ok');syncAll()}).catch(function(e){if(e.auth||/STAFF_PASSWORD/.test(e.message)){lockOut(e.message);return}draw();status('Offline: showing phone copy. Tap to retry','bad')})}
+
 function draw(){
-var due=0,exp=0;db.forEach(function(c){var d=days(c.d);if(d<0)exp++;else if(d<=30)due++});
-$('s1').textContent=db.length;$('s2').textContent=due;$('s3').textContent=exp;
-var l=db.slice().sort(function(a,b){return a.d<b.d?-1:1}).filter(function(c){var d=days(c.d);return flt==='all'||(flt==='due'&&d>=0&&d<=30)||(flt==='exp'&&d<0)});
-$('list').innerHTML=l.length?l.map(function(c){var d=days(c.d),cls=d<0?'b-bad':d<=30?'b-warn':'b-ok',tx=d<0?'Expired '+(-d)+' d ago':d===0?'Expires today':d+' days left';
-return '<div class="card cust"><h3>'+esc(c.n)+'</h3><div class="meta">'+esc(c.v||'-')+' · '+esc(c.i)+' · '+esc(c.p)+'</div><div><span class="badge '+cls+'">'+tx+'</span> <span class="meta">'+c.d+'</span></div><div class="row"><button class="btn g sm" data-r="'+c.id+'">Remind on WhatsApp</button><a class="btn o sm" style="text-decoration:none" href="tel:+91'+esc(c.p)+'">Call</a><button class="btn o sm" data-x="'+c.id+'">Delete</button></div></div>'}).join(''):'<p class="note">No customers here yet.</p>'}
-$('cf').addEventListener('submit',function(e){e.preventDefault();db.push({id:Date.now(),n:$('cn').value.trim(),p:$('cp').value.trim(),v:$('cv').value.trim(),i:$('ci').value,d:$('cd').value});save();this.reset();draw()});
+var u=[],s=0,x=0;db.forEach(function(c){var d=days(c.d);if(d<0)x++;else if(d<=5)u.push(c);else if(d<=30)s++});
+$('s1').textContent=db.length;$('s2').textContent=u.length;$('s3').textContent=s;$('s4').textContent=x;
+var b=$('bn');b.hidden=!u.length;if(u.length)b.textContent='⚠ '+u.length+(u.length>1?' policies':' policy')+' expiring within 5 days: '+u.map(function(c){var d=days(c.d);return c.n+(d===0?' (today)':' ('+d+'d)')}).join(', ');
+var l=db.slice().sort(function(a,b){return a.d<b.d?-1:1}).filter(function(c){var d=days(c.d);
+if(flt==='urg'&&!(d>=0&&d<=5))return false;if(flt==='soon'&&!(d>=0&&d<=30))return false;if(flt==='exp'&&d>=0)return false;
+return !q||(c.n+' '+c.v+' '+c.p).toLowerCase().indexOf(q)>-1});
+$('list').innerHTML=l.length?l.map(function(c){var d=days(c.d),cls=d<0?'expired':d<=5?'urgent':d<=30?'soon':'',tx=d<0?'Expired '+(-d)+'d ago':d===0?'EXPIRES TODAY':d<=5?'⚠ '+d+' days left':d+' days left';
+return '<div class="card cust '+cls+'"><h3>'+esc(c.n)+'<span class="badge">'+tx+'</span></h3><div class="meta">'+esc(c.v||'-')+' · '+esc(c.i)+' · '+esc(c.p)+'</div><div class="meta">Expiry: '+esc(c.d)+(c.by?' · by '+esc(c.by):'')+(c._u?' · not synced':'')+'</div><div class="row"><button class="btn g sm" data-a="wa" data-id="'+esc(c.id)+'">WhatsApp</button><a class="btn o sm" href="tel:+91'+esc(c.p)+'">Call</a><button class="btn o sm" data-a="ed" data-id="'+esc(c.id)+'">Edit</button><button class="btn o sm" data-a="dl" data-id="'+esc(c.id)+'">Delete</button></div></div>'}).join(''):'<p class="note">No customers here yet.</p>'}
+
+function find(id){return db.filter(function(k){return String(k.id)===String(id)})[0]}
+function resetForm(){$('cf').reset();$('eid').value='';$('ft').textContent='Add customer';$('sb').textContent='Add customer';$('cx').hidden=true}
+$('cf').addEventListener('submit',function(e){e.preventDefault();var c=find($('eid').value),d={n:$('cn').value.trim(),p:$('cp').value.trim(),v:$('cv').value.trim(),i:$('ci').value,d:$('cd').value};
+if(c){for(var k in d)c[k]=d[k]}else{c=d;c.id=String(Date.now());db.push(c)}
+c._u=1;cache();resetForm();draw();push(c)});
+$('cx').addEventListener('click',resetForm);
+$('list').addEventListener('click',function(e){var a=e.target.dataset.a,id=e.target.dataset.id;if(!a)return;var c=find(id);if(!c)return;
+if(a==='wa')window.open('https://wa.me/91'+c.p+'?text='+encodeURIComponent('Namaste '+c.n+', your insurance policy ('+(c.v||'policy')+', '+c.i+') expires on '+c.d+'. RK Insurance can renew it with the best discount. Call 9930943076.'),'_blank','noopener');
+if(a==='ed'){$('eid').value=c.id;$('cn').value=c.n;$('cp').value=c.p;$('cv').value=c.v;$('ci').value=c.i;$('cd').value=c.d;$('ft').textContent='Edit customer';$('sb').textContent='Save changes';$('cx').hidden=false;$('fd').open=true;$('fd').scrollIntoView({behavior:'smooth'})}
+if(a==='dl'&&confirm('Delete '+c.n+'?')){db=db.filter(function(k){return String(k.id)!==String(id)});cache();draw();chain=chain.then(function(){return api('DELETE','?id='+encodeURIComponent(id))}).then(function(){status('Saved ✓','ok')}).catch(function(er){if(er.auth)lockOut(er.message);else{alert('Delete was not saved. Check internet and try again.');load()}})}});
 $('flt').addEventListener('click',function(e){var f=e.target.dataset.f;if(!f)return;flt=f;this.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c.dataset.f===f)});draw()});
-$('list').addEventListener('click',function(e){var r=e.target.dataset.r,x=e.target.dataset.x;
-if(r){var c=db.filter(function(k){return k.id==r})[0];window.open('https://wa.me/91'+c.p+'?text='+encodeURIComponent('Namaste '+c.n+', your insurance policy ('+(c.v||'policy')+', '+c.i+') expires on '+c.d+'. RK Insurance can renew it with the best discount. Reply or call 9930943076.'),'_blank','noopener')}
-if(x&&confirm('Delete this customer?')){db=db.filter(function(k){return k.id!=x});save();draw()}});
-$('csv').addEventListener('click',function(){var t='Name,Mobile,Vehicle,Insurer,Expiry\n'+db.map(function(c){return[c.n,c.p,c.v,c.i,c.d].map(function(s){return '"'+String(s).replace(/"/g,'""')+'"'}).join(',')}).join('\n');var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(t);a.download='rk-customers.csv';a.click()});
-var h=location.hash.slice(1);if(['home','quote','staff','contact'].indexOf(h)>-1)go(h);
+$('sq').addEventListener('input',function(){q=this.value.trim().toLowerCase();draw()});
+$('csv').addEventListener('click',function(){var t='Name,Mobile,Vehicle,Insurer,Expiry\n'+db.map(function(c){return[c.n,c.p,c.v,c.i,c.d].map(function(s){return '"'+String(s==null?'':s).replace(/"/g,'""')+'"'}).join(',')}).join('\n');var a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(t);a.download='rk-customers.csv';a.click()});
+$('st').addEventListener('click',load);
+$('lo').addEventListener('click',function(){lockOut('')});
+function step(n,keep){['w1','w2','w3'].forEach(function(id,i){$(id).hidden=i!==n-1});if(!keep)$('lm').textContent=''}
+function pick(n,keep){$('wn').textContent=n;$('w2').dataset.n=n;step(2,keep);$('lp').value='';$('lp').focus()}
+function loadProfiles(){raw('/api/auth','GET').then(function(names){var last='';try{last=localStorage.getItem('rk_last')||''}catch(e){}
+if(last&&names.indexOf(last)>-1){pick(last,1);return}
+$('pl').innerHTML=names.length?names.map(function(n){return '<button class="btn w o pf" data-n="'+esc(n)+'">👤 '+esc(n)+'</button>'}).join(''):'<p class="note">No profile yet. Create the first one.</p>'}).catch(function(x){$('lm').textContent=em(x)})}
+function enter(r){try{sessionStorage.setItem('rk_t',r.token);sessionStorage.setItem('rk_n',r.name);localStorage.setItem('rk_last',r.name)}catch(e){}$('lp').value='';$('w3').reset();$('lm').textContent='';show(false);draw();load()}
+$('pl').addEventListener('click',function(e){var n=e.target.dataset.n;if(n)pick(n)});
+$('nw').addEventListener('click',function(){step(3)});
+$('bk').addEventListener('click',function(){step(1);loadProfiles()});
+$('sw').addEventListener('click',function(){try{localStorage.removeItem('rk_last')}catch(e){}step(1);loadProfiles()});
+$('w2').addEventListener('submit',function(e){e.preventDefault();$('lm').textContent='Checking…';raw('/api/auth','POST',{action:'login',name:this.dataset.n,pass:$('lp').value}).then(enter).catch(function(x){$('lm').textContent=em(x)})});
+$('w3').addEventListener('submit',function(e){e.preventDefault();if($('np').value!==$('nq').value){$('lm').textContent='Passcodes do not match';return}$('lm').textContent='Creating…';raw('/api/auth','POST',{action:'create',setup:$('cs').value,name:$('nn').value,pass:$('np').value}).then(enter).catch(function(x){$('lm').textContent=em(x)})});
+setInterval(draw,60000);
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&!$('app').hidden)load()});
+if(tok()){show(false);draw();load()}else{show(true);step(1);loadProfiles()}
 </script>
 </body>
 </html>
