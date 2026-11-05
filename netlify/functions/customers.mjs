@@ -1,6 +1,18 @@
 import { getStore } from "@netlify/blobs";
-import { verify } from "../lib/token.mjs";
+import { createHmac, timingSafeEqual } from "node:crypto";
 
+const secret = () => process.env.STAFF_PASSWORD || "";
+const verify = (t) => {
+  if (!t || !secret()) return null;
+  const [p, s] = t.split(".");
+  if (!p || !s) return null;
+  const a = Buffer.from(s), b = Buffer.from(createHmac("sha256", secret()).update(p).digest("base64url"));
+  if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
+  try {
+    const d = JSON.parse(Buffer.from(p, "base64url").toString());
+    return d.e > Date.now() ? d.n : null;
+  } catch { return null; }
+};
 const json = (d, s = 200) =>
   new Response(JSON.stringify(d), { status: s, headers: { "content-type": "application/json" } });
 
