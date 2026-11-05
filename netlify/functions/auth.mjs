@@ -1,6 +1,17 @@
 import { getStore } from "@netlify/blobs";
-import { sign, hash, newSalt, same } from "../lib/token.mjs";
+import { createHmac, timingSafeEqual, scryptSync, randomBytes } from "node:crypto";
 
+const secret = () => process.env.STAFF_PASSWORD || "";
+const hmac = (p) => createHmac("sha256", secret()).update(p).digest("base64url");
+const sign = (name) => {
+  const p = Buffer.from(JSON.stringify({ n: name, e: Date.now() + 12 * 3600e3 })).toString("base64url");
+  return p + "." + hmac(p);
+};
+const hash = (pass, salt) => scryptSync(pass, salt, 32).toString("hex");
+const same = (x, y) => {
+  const a = Buffer.from(x), b = Buffer.from(y);
+  return a.length === b.length && timingSafeEqual(a, b);
+};
 const json = (d, s = 200) =>
   new Response(JSON.stringify(d), { status: s, headers: { "content-type": "application/json" } });
 
@@ -22,7 +33,7 @@ export default async (req) => {
     if (pass.length < 4) return json({ error: "Passcode must be at least 4 characters" }, 400);
     if (profiles.some((p) => p.name.toLowerCase() === name.toLowerCase()))
       return json({ error: "This name already exists" }, 409);
-    const salt = newSalt();
+    const salt = randomBytes(16).toString("hex");
     profiles.push({ name, salt, hash: hash(pass, salt) });
     await store.setJSON("profiles", profiles);
     return json({ name, token: sign(name) });
