@@ -20,9 +20,11 @@ export default async (req) => {
   if (!process.env.STAFF_PASSWORD)
     return json({ error: "STAFF_PASSWORD is not set in Netlify environment variables" }, 500);
   const who = verify((req.headers.get("authorization") || "").replace("Bearer ", ""));
-  if (!who) return json({ error: "Session expired. Please login again." }, 401);
-
   const store = getStore("rk");
+  const profiles = (await store.get("profiles", { type: "json" })) || [];
+  if (!who || !profiles.some((p) => p.name === who))
+    return json({ error: "Session expired. Please login again." }, 401);
+
   let list = (await store.get("customers", { type: "json" })) || [];
 
   if (req.method === "POST") {
