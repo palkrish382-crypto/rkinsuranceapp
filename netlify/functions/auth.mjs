@@ -39,6 +39,14 @@ export default async (req) => {
     return json({ name, token: sign(name) });
   }
 
+  if (b.action === "delete") {
+    if (b.setup !== process.env.STAFF_PASSWORD) return json({ error: "Wrong setup code" }, 401);
+    const left = profiles.filter((p) => p.name.toLowerCase() !== name.toLowerCase());
+    if (left.length === profiles.length) return json({ error: "Profile not found" }, 404);
+    await store.setJSON("profiles", left);
+    return json({ ok: true });
+  }
+
   const p = profiles.find((x) => x.name.toLowerCase() === name.toLowerCase());
   if (!p || !same(hash(pass, p.salt), p.hash)) return json({ error: "Wrong passcode" }, 401);
   return json({ name: p.name, token: sign(p.name) });
